@@ -1,0 +1,19 @@
+/* containers only */
+
+.frame_inner_container {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  background-color: white;
+}
+
+.frame_inner_scroll {
+  width: 100%;
+  min-height: calc(100% - 4rem);
+  max-height: calc(100% - 4rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-bottom: 1rem;
+}
