@@ -2,15 +2,15 @@
 Depends on infrastructure for environment settings.<br>
 CORS issues avoided with api-proxy.
 
-This is a template for front end that aims to automate data handling between backend using JSON format's types for data.
-The goal is to reduce hours from building front end so you have more time to fullfill the styling needs of a project from setting up the structure to reducing user errors. It is similar to using libraries such as React-Admin, but with more freedom as a developer as you can modify this template to whichever needs or pick what you will.
-
-So what is this setup actually?
-As front end developer you have modules that are ready built and can be reused. As such they work as conditional react components that expect specific inputs especially a model. Models are your definition for the displayed data. Take a look at the given sample models. Much of the data turned to states for react is handled with redux where the JSON types play a very important part.
-
-To ensure you have created proper models there are tests available. I encourage writing models first in typescript as it will already give you errors if the model format is wrong to begin with. Using tests however is also recommended. Current version has a responses folder under tests which you can use to store actual call responses for testing that the attributes and json response match with your models and if not give detailed errors.
-
-This template is still under works and is very likely to change.
+This is a template for frontend that aims to automate data handling between backend api using **JSON:API** specification and **types** in data.
+The goal is to reduce hours from building frontend so you have more time to fullfill the styling needs of a project from setting up the structure to reducing user errors. It is similar to using libraries such as React-Admin, but with more flexibility as a developer as you can modify this template to whichever needs or pick what you will.<br>
+<br>
+So what is this setup actually?<br>
+As front end developer you have modules that are ready built and can be reused. As such they work as conditional react components that expect specific inputs especially a model. Models are your definition for the displayed data. Take a look at the given sample models. Much of the data turned to states for react is handled with redux where the JSON types play a very important part.<br>
+<br>
+To ensure you have created proper models there are tests available. I encourage writing models first in typescript as it will already give you errors if the model format is wrong to begin with. Using tests however is also recommended. Current version has a responses folder under tests which you can use to store actual call responses for testing that the attributes and json response match with your models and if not give detailed errors.<br>
+<br>
+This template is still under works and is very likely to change.<br>
 
 ### Development
 npm run dev<br>
