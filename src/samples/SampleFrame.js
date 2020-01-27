@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import Frame from '../modules/Frame';
 import test from '../models/forms/sampleCard';
+import { connect } from "react-redux";
+
+import lang from '../lang/index'
+import { Helmet } from 'react-helmet';
 
 class App extends Component {
   constructor(props) {
@@ -10,6 +14,11 @@ class App extends Component {
   render() {
     return (
       <div style={{ width: '50vw', height: '20vw', border: '1px solid black'}}>
+        <Helmet>
+          <html lang={lang.lang[this.props.reduxlang]}/>
+          <title>Sample Frame Test Data</title>
+          <meta name="”ROBOTS”" content="NOINDEX, FOLLOW" />
+        </Helmet>
         <Frame
           clickHandlerSubmit={e => {
             this.setState(e);
@@ -30,10 +39,19 @@ class App extends Component {
           contentArray={test}
           attributes={null}
           componentStyle={null}
+          lang={this.props.reduxlang}
         />
       </div>
     )
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  // state refers to global redux state
+  return {
+    reduxlang: state.appPath && state.appPath.appPath && state.appPath.appPath
+
+  };
+}
+
+export default connect(mapStateToProps)(App);

@@ -1,6 +1,7 @@
 module.exports = {
+  lang: 'de',
   email: 'Email',
   password: 'Passwort',
-  login: 'Anmelden',
+  login: 'Einloggen',
   register: 'Registrieren'
 };

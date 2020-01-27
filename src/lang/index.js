@@ -1,28 +1,45 @@
 import formsEN from './forms/en';
 import formsDE from './forms/de';
 
-import headersEN from './headers/en';
-import headersDE from './headers/de';
+import headEN from './head/en';
+import headDE from './head/de';
+
+import routesEN from './routes/en';
+import routesDE from './routes/de';
 
 const en = {
-  ...headersEN,
-  ...formsEN
+  ...headEN,
+  ...formsEN,
+  ...routesEN
 }
 
 const de = {
-  ...headersDE,
-  ...formsDE
+  ...headDE,
+  ...formsDE,
+  ...routesDE
 }
 
-let lang = 'de';
+const lang = {
+  en: en,
+  de: de,
+}
 
-// todo language subscribe to redux
+const newlang = packTogether();
+// language object converted so that each definition
+// carries all language variations (for convenience)
+function packTogether() {
+  const languages = Object.keys(lang);
+  const newObject = {};
+  // new language object
+  languages.forEach(
+    language => Object.keys(lang[language]).forEach(
+      definition => newObject[definition] = Object.assign({
+        [language]: lang[language][definition]
+      },newObject[definition])
+  ));
+  // used for checks if language exists
+  languages.forEach(language => newObject[language] = language);
+  return newObject;
+}
 
-export default function() {
-  if (lang === 'en') {
-    return en;
-  }
-  else if (lang === 'de') {
-    return de;
-  }
-};
+export default newlang;

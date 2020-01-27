@@ -9,13 +9,6 @@ const app = express();
 
 app.set('port', config.PORT);
 
-// socket.io
-// can work as event listener for online admins
-//const server = require("http").Server(app);
-//const io = require("socket.io")(server, {
-//  origins: app.get('port')
-//});
-
 // Implement status call
 app.use('/status', (req, res, next) => {
   res.header('Content-Type', 'text/plain; charset=utf-8');
@@ -42,12 +35,8 @@ app.use('/api', apiProxy);
 // Not found error handling
 /* eslint-disable no-unused-vars */
 app.use((req, res) => {
-    console.log(`Not found URL: ${req.url}`);
-  res
-    .status(HttpStatus.NOT_FOUND)
-    .send({
-      errors: new Error(HttpStatus.NOT_FOUND, HttpStatus.getStatusText(HttpStatus.NOT_FOUND)),
-    });
+  console.log(`Not found URL: ${req.url}`);
+  res.redirect(`/?${req.url}`);
 });
 
 // 500 error handling
@@ -69,20 +58,3 @@ app.on('error', (err) => {
 app.listen(app.get('port'), () => {
   console.log(`${pack.name} is running on port ${app.get('port')}`);
 });
-
-// SOCKET IO // SOCKET IO // SOCKET IO // SOCKET IO
-// only for data refresh events by tablename
-// anything more needs a more advanced setup
-// can work as event listener for online admins
-
-//io.on("connection", function(socket) {
-//    console.log('a user connected');
-//    socket.on("disconnect", () => {
-//      console.log('a user disconnected');
-//    });
-//    socket.on("modifyData", tablename => {
-//      if  (typeof tablename === 'string') {
-//        io.sockets.emit("dataUpdate", tablename);
-//      }
-//    });
-//});

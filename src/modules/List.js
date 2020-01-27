@@ -16,6 +16,8 @@ import store from '../redux/store/store';
 import * as reduxButton from '../redux/actions/listButtons'
 //import * as listSorting from '../redux/actions/listSorting'
 
+import validateLanguage from './validateLanguage';
+
 // unique react keys used in Array maps as index + key
 // use file names for consistency
 const uniqkey1 = 'list-1-'
@@ -35,12 +37,14 @@ const uniqkey2 = 'list-2-'
  * @param {Object} contentArray
  * @param {Array} attributes
  * @param {String} componentStyle
+ * @param {String} lang
  * 
  */
 export default function List({
   contentArray,
   attributes,
-  componentStyle
+  componentStyle,
+  lang
 }) {
   return (
     <div className={'list_inner_container'}>

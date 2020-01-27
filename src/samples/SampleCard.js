@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import Card from '../modules/Card';
 import test from '../models/forms/sampleCard';
+import { connect } from "react-redux";
+
+import lang from '../lang/index'
+import { Helmet } from 'react-helmet';
 
 class App extends Component {
   constructor(props) {
@@ -10,6 +14,11 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Helmet>
+          <html lang={lang.lang[this.props.reduxlang]}/>
+          <title>Sample Card Test Data</title>
+          <meta name="”ROBOTS”" content="NOINDEX, FOLLOW" />
+        </Helmet>
         <Card
           clickHandlerClose={() => {
             this.setState({ substep: null });
@@ -34,10 +43,18 @@ class App extends Component {
           contentArray={test}
           attributes={null}
           componentStyle={null}
+          lang={this.props.reduxlang}
         />
       </div>
     )
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  // state refers to global redux state
+  return {
+    reduxlang: state.appPath && state.appPath.appPath && state.appPath.appPath
+  };
+}
+
+export default connect(mapStateToProps)(App);

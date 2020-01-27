@@ -7,7 +7,7 @@ var testCard = {
             title: 'Required',
             type: FieldType.Text,
             db: 'email',
-            placeholder: lang().email,
+            placeholder: lang.email,
             width: '50%',
             maxLength: '50',
             required: 'true'
@@ -16,7 +16,7 @@ var testCard = {
             title: 'Username',
             type: FieldType.Text,
             db: 'username',
-            placeholder: lang().email,
+            placeholder: lang.email,
             width: '50%',
             maxLength: '50',
             bg_color: 'warning',
@@ -81,10 +81,10 @@ var testCard = {
             width: '20%'
         },
         {
-            title: lang().email,
+            title: lang.email,
             type: FieldType.Text,
             db: 'username',
-            placeholder: lang().email,
+            placeholder: lang.email,
             width: '80%',
             maxLength: '50'
         },
@@ -101,10 +101,10 @@ var testCard = {
             width: '75%',
         },
         {
-            title: lang().email,
+            title: lang.email,
             type: FieldType.Text,
             db: 'username',
-            placeholder: lang().email,
+            placeholder: lang.email,
             width: '50%',
             maxLength: '50'
         },
@@ -165,10 +165,10 @@ var testCard = {
             bg_color: 'blau'
         },
         {
-            title: lang().password,
+            title: lang.password,
             type: FieldType.Password,
             db: 'password',
-            placeholder: lang().password,
+            placeholder: lang.password,
             width: '100%',
             maxLength: '250'
         },
@@ -179,7 +179,7 @@ var testCard = {
             width: '35%'
         },
         {
-            title: lang().register,
+            title: lang.register,
             type: FieldType.Button,
             action: 'other',
             width: '35%'

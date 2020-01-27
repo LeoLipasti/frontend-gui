@@ -16,6 +16,8 @@ import store from '../redux/store/store';
 import * as reduxButton from '../redux/actions/tableButtons'
 import * as tableSorting from '../redux/actions/tableSorting'
 
+import validateLanguage from './validateLanguage';
+
 // unique react keys used in Array maps as index + key
 // use file names for consistency
 const uniqkey1 = 'table-1-'
@@ -35,12 +37,14 @@ const uniqkey2 = 'table-2-'
  * @param {Object} contentArray
  * @param {Array} attributes
  * @param {String} componentStyle
+ * @param {String} lang
  * 
  */
 export default function Table({
   contentArray,
   attributes,
-  componentStyle
+  componentStyle,
+  lang
 }) {
   const tableRows = new Array(25).fill('row');
   return (
@@ -57,7 +61,7 @@ export default function Table({
                     contentArray.type, entry.db
                   )
                 )}>
-                {entry.title}
+                {validateLanguage(entry.title,lang)}
               </div>
               )
           })}
@@ -123,7 +127,7 @@ export default function Table({
           {contentArray.columns.map((entry, index) => {
             return (
               <div key={uniqkey2 + index} style={Object.assign({ width: entry.width }, margins.fieldMargin, fonts.title)}>
-                {entry.title}
+                {validateLanguage(entry.title,lang)}
               </div>
               )
           })}

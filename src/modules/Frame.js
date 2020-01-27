@@ -15,6 +15,8 @@ import * as colors from '../style/rules/colors'
 import store from '../redux/store/store';
 import * as reduxButton from '../redux/actions/frameButtons'
 
+import validateLanguage from './validateLanguage';
+
 // unique react keys used in Array maps as index + key
 // use file names for consistency
 const uniqkey1 = 'frame-1-'
@@ -90,6 +92,7 @@ const uniqkey1 = 'frame-1-'
  * @param {Object} contentArray
  * @param {Array} attributes
  * @param {String} componentStyle
+ * @param {String} lang
  * 
  */
 export default function Frame({
@@ -99,7 +102,8 @@ export default function Frame({
   inputHandlerChange,
   contentArray,
   attributes,
-  componentStyle
+  componentStyle,
+  lang
 }) {
   const assignStyle = componentStyle ? style[componentStyle] : style['default'];
   // this mobile layout only works if window is vertical on page load / refresh
@@ -129,15 +133,15 @@ export default function Frame({
                     }>
                     {entry.type === 'text' && (
                       <div style={Object.assign({ width: '100%' }, margins.fieldMargin, fonts.title)}>
-                      {entry.title}
+                      {validateLanguage(entry.title,lang)}
                         <input
                           style={Object.assign({ width: '100%', color: colors[entry.color], backgroundColor: colors[entry.bg_color] }, sizes.inputField, sizes.borderInput)}
                           type={entry.type}
-                          placeholder={entry.placeholder}
-                          name={entry.db}
+                          placeholder={validateLanguage(entry.placeholder,lang)}
+                          name={validateLanguage(entry.db,lang)}
                           readOnly={!!entry.locked}
                           required={!!entry.required}
-                          defaultValue={attributes ? attributes[entry.db] : ''}
+                          defaultValue={validateLanguage(attributes ? attributes[entry.db] : '',lang)}
                           maxLength={entry.maxLength}
                           onChange={e => inputHandlerChange({ [entry.db]: e.target.value })}
                           onClick={() => inputHandlerFocus()}
@@ -146,13 +150,13 @@ export default function Frame({
                       )}
                       {entry.type === 'select' && (
                         <div style={Object.assign({ width: '100%' }, margins.fieldMargin, fonts.title)}>
-                        {entry.title}
+                        {validateLanguage(entry.title,lang)}
                           <select
                             style={Object.assign({ width: '100%', color: colors[entry.color], backgroundColor: colors[entry.bg_color] }, sizes.inputField, sizes.borderInput)}
-                            placeholder={entry.placeholder}
+                            placeholder={validateLanguage(entry.placeholder,lang)}
                             readOnly={!!entry.locked}
                             required={!!entry.required}
-                            defaultValue={attributes ? attributes[entry.db] : ''}
+                            defaultValue={validateLanguage(attributes ? attributes[entry.db] : '',lang)}
                             onClick={() => inputHandlerFocus()}
                             onChange={e => inputHandlerChange({ [entry.db]: e.target.value })}
                           >
@@ -168,18 +172,18 @@ export default function Frame({
                       )}
                       {entry.type === 'textarea' && (
                         <div style={Object.assign({ width: '100%' }, margins.fieldMargin, fonts.title)}>
-                        {entry.title}
+                        {validateLanguage(entry.title,lang)}
                           <textarea
                             style={Object.assign({ width: '100%', color: colors[entry.color], backgroundColor: colors[entry.bg_color] }, sizes.borderInput)}
-                            placeholder={entry.placeholder}
+                            placeholder={validateLanguage(entry.placeholder,lang)}
                             readOnly={!!entry.locked}
                             required={!!entry.required}
-                            defaultValue={attributes ? attributes[entry.db] : ''}
+                            defaultValue={validateLanguage(attributes ? attributes[entry.db] : '',lang)}
                             onClick={() => inputHandlerFocus()}
                             onChange={e => inputHandlerChange({ [entry.db]: e.target.value })}
                             rows={entry.rows}
                             cols={entry.cols}
-                            name={entry.db}
+                            name={validateLanguage(entry.db,lang)}
                             maxLength={entry.maxLength}
                           >
                           </textarea>
@@ -187,7 +191,7 @@ export default function Frame({
                       )}
                       {entry.type === 'displaytxt' && (
                         <div style={Object.assign({ width: '100%' }, margins.fieldMargin, fonts.title)}>
-                        {entry.title}
+                        {validateLanguage(entry.title,lang)}
                           <div
                             style={Object.assign({ width: '100%', color: colors[entry.color], backgroundColor: colors[entry.bg_color] }, fonts.paragraph, sizes.borderInput)}
                             onClick={() => inputHandlerFocus()}
@@ -199,15 +203,15 @@ export default function Frame({
                       )}
                     {entry.type === 'password' && (
                       <div style={Object.assign({ width: '100%' }, margins.fieldMargin, fonts.title)}>
-                      {entry.title}
+                      {validateLanguage(entry.title,lang)}
                         <input
                           style={Object.assign({ width: '100%', color: colors[entry.color], backgroundColor: colors[entry.bg_color] }, sizes.inputField, sizes.borderInput)}
                           type={entry.type}
-                          placeholder={entry.placeholder}
-                          name={entry.db}
+                          placeholder={validateLanguage(entry.placeholder,lang)}
+                          name={validateLanguage(entry.db,lang)}
                           readOnly={!!entry.locked}
                           required={!!entry.required}
-                          defaultValue={attributes ? attributes[entry.db] : ''}
+                          defaultValue={validateLanguage(attributes ? attributes[entry.db] : '',lang)}
                           maxLength={entry.maxLength}
                           onChange={e => inputHandlerChange({ [entry.db]: e.target.value })}
                           onClick={() => inputHandlerFocus()}
@@ -221,16 +225,16 @@ export default function Frame({
                         <input
                           style={{ color: colors[entry.color], backgroundColor: colors[entry.bg_color] }}
                           type={entry.type}
-                          defaultChecked={entry.placeholder}
-                          name={entry.name}
+                          defaultChecked={validateLanguage(entry.placeholder,lang)}
+                          name={validateLanguage(entry.name,lang)}
                           readOnly={!!entry.locked}
                           required={!!entry.required}
-                          defaultValue={attributes ? attributes[entry.db] : ''}
+                          defaultValue={validateLanguage(attributes ? attributes[entry.db] : '',lang)}
                           maxLength={entry.maxLength}
                           onChange={e => inputHandlerChange({ [entry.db]: e.target.value })}
                           onClick={() => inputHandlerFocus()}
                         />
-                        {entry.title}
+                        {validateLanguage(entry.title,lang)}
                       </div>
                     </div>
                     )}
@@ -241,29 +245,29 @@ export default function Frame({
                           <input
                             style={{ color: colors[entry.color], backgroundColor: colors[entry.bg_color] }}
                             type={entry.type}
-                            defaultChecked={entry.placeholder}
-                            name={entry.db}
+                            defaultChecked={validateLanguage(entry.placeholder,lang)}
+                            name={validateLanguage(entry.db,lang)}
                             readOnly={!!entry.locked}
                             required={!!entry.required}
-                            defaultValue={attributes ? attributes[entry.db] : ''}
+                            defaultValue={validateLanguage(attributes ? attributes[entry.db] : '',lang)}
                             maxLength={entry.maxLength}
                             onChange={e => inputHandlerChange({ [entry.db]: e.target.value })}
                             onClick={() => inputHandlerFocus()}
                           />
-                          {entry.title}
+                          {validateLanguage(entry.title,lang)}
                         </div>
                       </div>
                     )}
                     {entry.type === 'color' && (
                       <div style={Object.assign({ width: '100%' }, margins.fieldMargin, fonts.title)}>
-                      {entry.title}
+                      {validateLanguage(entry.title,lang)}
                         <input
                           type={entry.type}
                           style={Object.assign({ width: '100%', color: colors[entry.color], backgroundColor: colors[entry.bg_color] }, sizes.colorField, sizes.borderInput)}
-                          name={entry.db}
+                          name={validateLanguage(entry.db,lang)}
                           readOnly={!!entry.locked}
                           required={!!entry.required}
-                          defaultValue={attributes ? attributes[entry.db] : ''}
+                          defaultValue={validateLanguage(attributes ? attributes[entry.db] : '',lang)}
                           onChange={e => inputHandlerChange({ [entry.db]: e.target.value })}
                           onClick={() => inputHandlerFocus()}
                         />
@@ -271,14 +275,14 @@ export default function Frame({
                     )}
                     {entry.type === 'date' && (
                       <div style={Object.assign({ width: '100%' }, margins.fieldMargin, fonts.title)}>
-                      {entry.title}
+                      {validateLanguage(entry.title,lang)}
                         <input
                           type={entry.type}
                           style={Object.assign({ width: '100%', color: colors[entry.color], backgroundColor: colors[entry.bg_color] }, sizes.inputField, sizes.borderInput)}
-                          name={entry.db}
+                          name={validateLanguage(entry.db,lang)}
                           readOnly={!!entry.locked}
                           required={!!entry.required}
-                          defaultValue={attributes ? attributes[entry.db] : ''}
+                          defaultValue={validateLanguage(attributes ? attributes[entry.db] : '',lang)}
                           onChange={e => inputHandlerChange({ [entry.db]: e.target.value })}
                           onClick={() => inputHandlerFocus()}
                         />
@@ -286,14 +290,14 @@ export default function Frame({
                     )}
                     {entry.type === 'datetime-local' && (
                       <div style={Object.assign({ width: '100%' }, margins.fieldMargin, fonts.title)}>
-                      {entry.title}
+                      {validateLanguage(entry.title,lang)}
                         <input
                           type={entry.type}
                           style={Object.assign({ width: '100%', color: colors[entry.color], backgroundColor: colors[entry.bg_color] }, sizes.inputField, sizes.borderInput)}
-                          name={entry.db}
+                          name={validateLanguage(entry.db,lang)}
                           readOnly={!!entry.locked}
                           required={!!entry.required}
-                          defaultValue={attributes ? attributes[entry.db] : ''}
+                          defaultValue={validateLanguage(attributes ? attributes[entry.db] : '',lang)}
                           onChange={e => inputHandlerChange({ [entry.db]: e.target.value })}
                           onClick={() => inputHandlerFocus()}
                         />
@@ -301,14 +305,14 @@ export default function Frame({
                     )}
                     {entry.type === 'month' && (
                       <div style={Object.assign({ width: '100%' }, margins.fieldMargin, fonts.title)}>
-                      {entry.title}
+                      {validateLanguage(entry.title,lang)}
                         <input
                           type={entry.type}
                           style={Object.assign({ width: '100%', color: colors[entry.color], backgroundColor: colors[entry.bg_color] }, sizes.inputField, sizes.borderInput)}
-                          name={entry.db}
+                          name={validateLanguage(entry.db,lang)}
                           readOnly={!!entry.locked}
                           required={!!entry.required}
-                          defaultValue={attributes ? attributes[entry.db] : ''}
+                          defaultValue={validateLanguage(attributes ? attributes[entry.db] : '',lang)}
                           onChange={e => inputHandlerChange({ [entry.db]: e.target.value })}
                           onClick={() => inputHandlerFocus()}
                         />
@@ -316,14 +320,14 @@ export default function Frame({
                     )}
                     {entry.type === 'time' && (
                       <div style={Object.assign({ width: '100%' }, margins.fieldMargin, fonts.title)}>
-                      {entry.title}
+                      {validateLanguage(entry.title,lang)}
                         <input
                           type={entry.type}
                           style={Object.assign({ width: '100%', color: colors[entry.color], backgroundColor: colors[entry.bg_color] }, sizes.inputField, sizes.borderInput)}
-                          name={entry.db}
+                          name={validateLanguage(entry.db,lang)}
                           readOnly={!!entry.locked}
                           required={!!entry.required}
-                          defaultValue={attributes ? attributes[entry.db] : ''}
+                          defaultValue={validateLanguage(attributes ? attributes[entry.db] : '',lang)}
                           onChange={e => inputHandlerChange({ [entry.db]: e.target.value })}
                           onClick={() => inputHandlerFocus()}
                         />
@@ -331,14 +335,14 @@ export default function Frame({
                     )}
                     {entry.type === 'number' && (
                       <div style={Object.assign({ width: '100%' }, margins.fieldMargin, fonts.title)}>
-                      {entry.title}
+                      {validateLanguage(entry.title,lang)}
                         <input
                           type={entry.type}
                           style={Object.assign({ width: '100%', color: colors[entry.color], backgroundColor: colors[entry.bg_color] }, sizes.inputField, sizes.borderInput)}
-                          name={entry.db}
+                          name={validateLanguage(entry.db,lang)}
                           readOnly={!!entry.locked}
                           required={!!entry.required}
-                          defaultValue={attributes ? attributes[entry.db] : ''}
+                          defaultValue={validateLanguage(attributes ? attributes[entry.db] : '',lang)}
                           max={entry.max}
                           min={entry.min}
                           onChange={e => inputHandlerChange({ [entry.db]: e.target.value })}
@@ -348,14 +352,14 @@ export default function Frame({
                     )}
                     {entry.type === 'range' && (
                       <div style={Object.assign({ width: '100%' }, margins.fieldMargin, fonts.title)}>
-                      {entry.title}
+                      {validateLanguage(entry.title,lang)}
                         <input
                           type={entry.type}
                           style={Object.assign({ width: '100%', color: colors[entry.color], backgroundColor: colors[entry.bg_color] }, sizes.inputField, sizes.borderInput)}
-                          name={entry.db}
+                          name={validateLanguage(entry.db,lang)}
                           readOnly={!!entry.locked}
                           required={!!entry.required}
-                          defaultValue={attributes ? attributes[entry.db] : ''}
+                          defaultValue={validateLanguage(attributes ? attributes[entry.db] : '',lang)}
                           max={entry.max}
                           min={entry.min}
                           onChange={e => inputHandlerChange({ [entry.db]: e.target.value })}
@@ -365,14 +369,14 @@ export default function Frame({
                     )}
                     {entry.type === 'tel' && (
                       <div style={Object.assign({ width: '100%' }, margins.fieldMargin, fonts.title)}>
-                      {entry.title}
+                      {validateLanguage(entry.title,lang)}
                         <input
                           type={entry.type}
                           style={Object.assign({ width: '100%', color: colors[entry.color], backgroundColor: colors[entry.bg_color] }, sizes.inputField, sizes.borderInput)}
-                          name={entry.db}
+                          name={validateLanguage(entry.db,lang)}
                           readOnly={!!entry.locked}
                           required={!!entry.required}
-                          defaultValue={attributes ? attributes[entry.db] : ''}
+                          defaultValue={validateLanguage(attributes ? attributes[entry.db] : '',lang)}
                           max={entry.max}
                           min={entry.min}
                           pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
@@ -383,14 +387,14 @@ export default function Frame({
                     )}
                     {entry.type === 'email' && (
                       <div style={Object.assign({ width: '100%' }, margins.fieldMargin, fonts.title)}>
-                      {entry.title}
+                      {validateLanguage(entry.title,lang)}
                         <input
                           type={entry.type}
                           style={Object.assign({ width: '100%', color: colors[entry.color], backgroundColor: colors[entry.bg_color] }, sizes.inputField, sizes.borderInput)}
-                          name={entry.db}
+                          name={validateLanguage(entry.db,lang)}
                           readOnly={!!entry.locked}
                           required={!!entry.required}
-                          defaultValue={attributes ? attributes[entry.db] : ''}
+                          defaultValue={validateLanguage(attributes ? attributes[entry.db] : '',lang)}
                           onChange={e => inputHandlerChange({ [entry.db]: e.target.value })}
                           onClick={() => inputHandlerFocus()}
                         />
@@ -398,14 +402,14 @@ export default function Frame({
                     )}
                     {entry.type === 'file' && (
                       <div style={Object.assign({ width: '100%' }, margins.fieldMargin, fonts.title)}>
-                      {entry.title}
+                      {validateLanguage(entry.title,lang)}
                         <input
                           type={entry.type}
                           style={Object.assign({ width: '100%', color: colors[entry.color], backgroundColor: colors[entry.bg_color] }, sizes.inputField, sizes.borderInput)}
-                          name={entry.db}
+                          name={validateLanguage(entry.db,lang)}
                           readOnly={!!entry.locked}
                           required={!!entry.required}
-                          defaultValue={attributes ? attributes[entry.db] : ''}
+                          defaultValue={validateLanguage(attributes ? attributes[entry.db] : '',lang)}
                           onChange={e => inputHandlerChange({ [entry.db]: e.target.value })}
                           onClick={() => inputHandlerFocus()}
                         />
@@ -420,7 +424,7 @@ export default function Frame({
                           name={entry.action}
                           onClick={() => store.dispatch(reduxButton[entry.action](null))}
                         >
-                        {entry.title}
+                        {validateLanguage(entry.title,lang)}
                         </button>
                       </div>
                     )}
@@ -450,7 +454,7 @@ export default function Frame({
                       name={entry.action}
                       onClick={() => clickHandlerOther()}
                     >
-                    {entry.title}
+                    {validateLanguage(entry.title,lang)}
                     </button>
                   </div>
                 )
@@ -469,7 +473,7 @@ export default function Frame({
                       style={Object.assign({ width: '100%', color: colors[entry.color], backgroundColor: colors[entry.bg_color] }, margins.buttonMargin, sizes.borderButton)}
                       type='submit'
                       name={entry.action}
-                      value={entry.title}
+                      value={validateLanguage(entry.title,lang)}
                       onClick={() => clickHandlerSubmit()}
                     />
                   </div>
