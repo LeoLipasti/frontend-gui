@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import List from '../modules/List';
+import ListModule from '../components/ListModule';
 import { connect } from "react-redux";
-import { tableData } from '../redux/actions/tableData'
+import { tableData } from '../redux/actions/modules/tableData'
 import store from '../redux/store/store'
 import test from '../models/lists/sampleList';
 import testdata from '../dev/testdata';
@@ -25,8 +25,8 @@ class App extends Component {
           <title>Sample List Test Data</title>
           <meta name="”ROBOTS”" content="NOINDEX, FOLLOW" />
         </Helmet>
-        <List
-          contentArray={test}
+        <ListModule
+          model={test}
           attributes={!!this.props.sampleProfiles && this.props.sampleProfiles}
           componentStyle={null}
           lang={this.props.reduxlang}

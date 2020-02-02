@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import Card from '../modules/Card';
+import CardModule from '../components/CardModule';
 import test from '../models/forms/sampleCard';
 import { connect } from "react-redux";
 
 import lang from '../lang/index'
 import { Helmet } from 'react-helmet';
 
+// sample card with close
 class App extends Component {
   constructor(props) {
     super(props);
@@ -19,31 +20,17 @@ class App extends Component {
           <title>Sample Card Test Data</title>
           <meta name="”ROBOTS”" content="NOINDEX, FOLLOW" />
         </Helmet>
-        <Card
-          clickHandlerClose={() => {
-            this.setState({ substep: null });
-            console.log("close");
-          }}
-          clickHandlerSubmit={e => {
-            this.setState(e);
-            console.log("submit states");
-          }}
-          clickHandlerOther={e => {
-            this.setState(e);
-            console.log("some action");
-          }}
-          inputHandlerFocus={e => {
-            this.setState(e);
-            console.log("focus");
-          }}
-          inputHandlerChange = {e => {
-            this.setState(e);
-            console.log("changed state");
-          }}
-          contentArray={test}
+        <CardModule
           attributes={null}
+          model={test}
           componentStyle={null}
-          lang={this.props.reduxlang}
+          reduxID="sampleCard"
+          route="testcalls"
+          language={this.props.reduxlang}
+          closed={this.props.moduleState && this.props.moduleState.module_closed}
+          clickHandlerOther={e => {
+            console.log('some action');
+          }}
         />
       </div>
     )
@@ -53,7 +40,8 @@ class App extends Component {
 function mapStateToProps(state) {
   // state refers to global redux state
   return {
-    reduxlang: state.appPath && state.appPath.appPath && state.appPath.appPath
+    reduxlang: state.appPath && state.appPath.appPath && state.appPath.appPath,
+    moduleState: state.moduleStates && state.moduleStates["moduledata_sampleCard"]
   };
 }
 

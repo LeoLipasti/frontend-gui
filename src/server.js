@@ -32,7 +32,7 @@ const apiProxy = proxy({
 
 app.use('/api', apiProxy);
 
-// Not found error handling
+// Routing with query to return app state on refresh
 /* eslint-disable no-unused-vars */
 app.use((req, res) => {
   console.log(`Not found URL: ${req.url}`);

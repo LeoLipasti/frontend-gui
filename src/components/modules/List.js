@@ -1,20 +1,20 @@
 import React from 'react';
 
-import style from '../style/modules/module-list-stylesheet';
+import style from '../../style/modules/module-list-stylesheet';
 
-import margins from '../style/rules/margins'
+import margins from '../../style/rules/margins'
 
-import sizes from '../style/rules/sizes'
+import sizes from '../../style/rules/sizes'
 
-import fonts from '../style/rules/fonts'
+import fonts from '../../style/rules/fonts'
 
-import units from '../style/rules/units'
+import units from '../../style/rules/units'
 
-import * as colors from '../style/rules/colors'
+import * as colors from '../../style/rules/colors'
 
-import store from '../redux/store/store';
-import * as reduxButton from '../redux/actions/listButtons'
-//import * as listSorting from '../redux/actions/listSorting'
+import store from '../../redux/store/store';
+import * as reduxButton from '../../redux/actions/modules/listButtons'
+//import * as listSorting from '../../redux/actions/modules/listSorting'
 
 import validateLanguage from './validateLanguage';
 

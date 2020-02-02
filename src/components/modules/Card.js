@@ -1,22 +1,22 @@
 import React from 'react';
 
-import style from '../style/modules/module-card-stylesheet';
+import style from '../../style/modules/module-card-stylesheet';
 
-import close from '../images/close.png';
+import close from '../../images/close.png';
 
-import margins from '../style/rules/margins'
+import margins from '../../style/rules/margins'
 
-import sizes from '../style/rules/sizes'
+import sizes from '../../style/rules/sizes'
 
-import fonts from '../style/rules/fonts'
+import fonts from '../../style/rules/fonts'
 
-import units from '../style/rules/units'
+import units from '../../style/rules/units'
 
 
-import * as colors from '../style/rules/colors'
+import * as colors from '../../style/rules/colors'
 
-import store from '../redux/store/store';
-import * as reduxButton from '../redux/actions/cardButtons'
+import store from '../../redux/store/store';
+import * as reduxButton from '../../redux/actions/modules/cardButtons';
 
 import validateLanguage from './validateLanguage';
 

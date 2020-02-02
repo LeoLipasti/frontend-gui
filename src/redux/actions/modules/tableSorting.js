@@ -1,7 +1,7 @@
-import store from '../store/store';
-import { tableData } from '../actions/tableData'
+import store from '../../store/store';
+import { tableData } from './tableData'
 
-export async function listSort(tableName, sort) {
+export async function tableSort(tableName, sort) {
   const tableSorting = store.getState().tableSorting;
   const desc = !!tableSorting ? !tableSorting[tableName].desc : false
   const results = store.getState().tableData[tableName];

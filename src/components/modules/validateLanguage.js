@@ -1,8 +1,3 @@
-/**
- * @param {String | Number | Object} validateValue
- * @param {String} lang
- * 
- */
 export default function validateLanguage(validateValue,lang) {
   if (Number.isInteger(validateValue)) {
     return validateValue;

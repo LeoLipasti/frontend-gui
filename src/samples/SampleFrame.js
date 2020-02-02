@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Frame from '../modules/Frame';
+import FrameModule from '../components/FrameModule';
 import test from '../models/forms/sampleCard';
 import { connect } from "react-redux";
 
@@ -19,27 +19,16 @@ class App extends Component {
           <title>Sample Frame Test Data</title>
           <meta name="”ROBOTS”" content="NOINDEX, FOLLOW" />
         </Helmet>
-        <Frame
-          clickHandlerSubmit={e => {
-            this.setState(e);
-            console.log("submit states");
-          }}
-          clickHandlerOther={e => {
-            this.setState(e);
-            console.log("some action");
-          }}
-          inputHandlerFocus={e => {
-            this.setState(e);
-            console.log("focus");
-          }}
-          inputHandlerChange = {e => {
-            this.setState(e);
-            console.log("changed state");
-          }}
-          contentArray={test}
+        <FrameModule
           attributes={null}
+          model={test}
           componentStyle={null}
-          lang={this.props.reduxlang}
+          reduxID="sampleFrame"
+          route="testcalls"
+          language={this.props.reduxlang}
+          clickHandlerOther={e => {
+            console.log('some action');
+          }}
         />
       </div>
     )

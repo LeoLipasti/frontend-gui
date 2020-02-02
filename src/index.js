@@ -9,13 +9,12 @@ import './style/css/containers/list.css';
 
 import { Provider } from "react-redux";
 import store from "./redux/store/store"
-import { appPath } from './redux/actions/appPath'
-//import App from './App';
-//import App from './samples/SampleCard';
-//import App from './samples/SampleFrame';
-//import App from './samples/SampleTableTestData';
-//import App from './samples/SampleListTestData';
-import Login from './Login';
+import { appPath } from './redux/actions/routes/appPath'
+import Login from './samples/SampleCard';
+//import Login from './samples/SampleFrame';
+//import Login from './samples/SampleTableTestData';
+//import Login from './samples/SampleListTestData';
+//import Login from './Login';
 import lang from './lang/index'
 import {
   BrowserRouter as Router,
@@ -30,8 +29,8 @@ let languagekey = sessionStorage.getItem('language');
 if (!!languagekey) {
   language = languagekey;
 } else {
-  sessionStorage.setItem('language', 'en');
-  language = "en";
+  sessionStorage.setItem('language', 'de');
+  language = "de";
 }
 let queryUrl;
 

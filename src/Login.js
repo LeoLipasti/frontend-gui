@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Card from './modules/Card';
+import CardModule from './components/CardModule';
 import auth from './models/forms/sampleAuth';
 import lang from './lang/index'
 import { connect } from "react-redux";
@@ -35,26 +35,17 @@ class Login extends Component {
             </li>
           </ul>
         </div>
-        <Card
-          clickHandlerClose={null}
-          clickHandlerSubmit={e => {
-            this.setState(e);
-            console.log('submit');
-          }}
-          clickHandlerOther={e => {
-            this.setState(e);
-            console.log('other');
-          }}
-          inputHandlerFocus={e => {
-            this.setState(e);
-          }}
-          inputHandlerChange = {e => {
-            this.setState(e);
-          }}
-          contentArray={auth}
+        <CardModule
           attributes={null}
+          model={auth}
           componentStyle={null}
-          lang={this.props.reduxlang}
+          reduxID="Login"
+          route="testcalls"
+          language={this.props.reduxlang}
+          closed={false}
+          clickHandlerOther={e => {
+            console.log('register placeholder');
+          }}
         />
       </div>
     )

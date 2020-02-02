@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Table from '../modules/Table';
+import TableModule from '../components/TableModule';
 import { connect } from "react-redux";
-import { tableData } from '../redux/actions/tableData'
+import { tableData } from '../redux/actions/modules/tableData'
 import store from '../redux/store/store'
 import test from '../models/tables/sampleTable';
 import testdata from '../dev/testdata';
@@ -25,8 +25,8 @@ class App extends Component {
           <title>Sample Table Test Data</title>
           <meta name="”ROBOTS”" content="NOINDEX, FOLLOW" />
         </Helmet>
-        <Table
-          contentArray={test}
+        <TableModule
+          model={test}
           attributes={!!this.props.sampleProfiles && this.props.sampleProfiles}
           componentStyle={null}
           lang={this.props.reduxlang}
