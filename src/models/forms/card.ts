@@ -16,6 +16,13 @@ export enum FieldType {
   Time = 'time',
   Month = 'month',
   Button = 'button',
+  RowStart = 'row-start',
+  RowEnd = 'row-end'
+}
+
+export enum BootStrap {
+  colsm = 'col-sm',
+  colmd = 'col-md',
 }
 
 interface Options {
@@ -24,15 +31,13 @@ interface Options {
 }
 
 interface Field {
-  title: string,
+  title?: string,
   type: string,
   action?: string,
   image?: string,
   db?: string,
   placeholder?: string | boolean,
   maxLength?: string,
-  color?: string,
-  bg_color?: string,
   max?: Number,
   min?: Number,
   rows?: string,
@@ -40,13 +45,12 @@ interface Field {
   locked?: string,
   message?: string,
   options?: Array<Options>,
-  width: string
+  width?: string
 }
 
 interface Card {
   fields: Array<Field>,
-  header: string,
-  alignment?: string
+  header: string
 }
 
 export function typecheckCard(card: Card) {

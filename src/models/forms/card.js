@@ -17,6 +17,8 @@ export var FieldType;
     FieldType["Time"] = "time";
     FieldType["Month"] = "month";
     FieldType["Button"] = "button";
+    FieldType["RowStart"] = "row-start";
+    FieldType["RowEnd"] = "row-end";
 })(FieldType || (FieldType = {}));
 export function typecheckCard(card) {
     return card;

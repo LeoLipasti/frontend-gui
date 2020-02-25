@@ -21,9 +21,10 @@ class App extends Component {
           <meta name="”ROBOTS”" content="NOINDEX, FOLLOW" />
         </Helmet>
         <CardModule
-          attributes={null}
+          classnames={''}
+          inlinestyle={null}
           model={test}
-          componentStyle={null}
+          attributes={null}
           reduxID="sampleCard"
           route="testcalls"
           language={this.props.reduxlang}

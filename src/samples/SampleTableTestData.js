@@ -26,9 +26,10 @@ class App extends Component {
           <meta name="”ROBOTS”" content="NOINDEX, FOLLOW" />
         </Helmet>
         <TableModule
+          classnames={''}
+          inlinestyle={null}
           model={test}
           attributes={!!this.props.sampleProfiles && this.props.sampleProfiles}
-          componentStyle={null}
           lang={this.props.reduxlang}
         />
       </div>

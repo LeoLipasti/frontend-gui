@@ -4,19 +4,13 @@ import style from '../../style/modules/module-table-stylesheet';
 
 import margins from '../../style/rules/margins'
 
-import sizes from '../../style/rules/sizes'
-
 import fonts from '../../style/rules/fonts'
-
-import units from '../../style/rules/units'
-
-import * as colors from '../../style/rules/colors'
 
 import store from '../../redux/store/store';
 import * as reduxButton from '../../redux/actions/modules/tableButtons'
 import * as tableSorting from '../../redux/actions/modules/tableSorting'
 
-import validateLanguage from './validateLanguage';
+import validateLanguage from './functions/validateLanguage';
 
 // unique react keys used in Array maps as index + key
 // use file names for consistency
@@ -36,14 +30,14 @@ const uniqkey2 = 'table-2-'
  * 
  * @param {Object} contentArray
  * @param {Array} attributes
- * @param {String} componentStyle
+ * @param {String} reduxID
  * @param {String} lang
  * 
  */
 export default function Table({
   contentArray,
   attributes,
-  componentStyle,
+  reduxID,
   lang
 }) {
   const tableRows = new Array(25).fill('row');
@@ -55,13 +49,17 @@ export default function Table({
         }>
           {contentArray.columns.map((entry, index) => {
             return (
-              <div key={uniqkey2 + index} style={Object.assign({ width: entry.width, overflow: units.hidden, cursor: 'pointer' }, margins.fieldMargin, fonts.title)} 
-                onClick={() => store.dispatch(
-                  tableSorting.tableSort(
-                    contentArray.type, entry.db
-                  )
-                )}>
-                {validateLanguage(entry.title,lang)}
+              <div key={uniqkey2 + reduxID + index} style={Object.assign({ width: entry.width }, margins.fieldMargin, fonts.title)}>
+                <span class="btn btn-primary"
+                  key={uniqkey2 + reduxID + index}
+                  style={{overflow: 'hidden', cursor: 'pointer'}}
+                  onClick={() => store.dispatch(
+                    tableSorting.tableSort(
+                      contentArray.type, entry.db
+                    )
+                  )}>
+                  {validateLanguage(entry.title,lang)}
+                </span>
               </div>
               )
           })}
@@ -71,27 +69,26 @@ export default function Table({
         <div>
           {attributes.map((row, rowIndex) => {
             return (
-              <div key={uniqkey1 + rowIndex}>
+              <div key={uniqkey1 + reduxID + rowIndex}>
                 {!!contentArray && (
                   <div style={
                     style[contentArray.alignment]
                   }>
                     {contentArray.columns.map((entry, index) => {
                       return (
-                        <div key={uniqkey1 + rowIndex + uniqkey2 + index} style={Object.assign({ width: entry.width }, margins.fieldMargin, fonts.title)}>
+                        <div key={uniqkey1 + reduxID + rowIndex + uniqkey2 + index} style={Object.assign({ width: entry.width }, margins.fieldMargin, fonts.title)}>
                           {entry.type === 'text' && (
-                            <div style={Object.assign({ width: '100%', overflow: units.hidden }, margins.fieldMargin, fonts.title)}>
+                            <div>
                               {attributes[rowIndex].attributes ? attributes[rowIndex].attributes[entry.db] : entry.placeholder}
                             </div>
                             )}
                           {entry.type === 'button' && (
                             <button
-                              style={Object.assign({ width: '100%' , overflow: units.hidden, color: colors[entry.color], backgroundColor: colors[entry.bg_color] }, margins.buttonMargin, sizes.inputField, sizes.borderReduxButton)}
-                              type={entry.type}
-                              name={entry.action}
-                              onClick={() => store.dispatch(reduxButton[entry.action](null))}
-                            >
-                            {entry.name}
+                                onClick={() => store.dispatch(reduxButton[entry.action](null))}
+                                type={entry.type}
+                                name={entry.action}
+                                content={entry.name}>
+                              {entry.name}
                             </button>
                           )}
                         </div>
@@ -112,7 +109,7 @@ export default function Table({
             }>
               {contentArray.columns.map((entry, index) => {
                 return (
-                  <div key={uniqkey2 + index} style={Object.assign({ width: entry.width }, margins.fieldMargin, fonts.title)}>
+                  <div key={uniqkey2 + reduxID + index} style={Object.assign({ width: entry.width }, margins.fieldMargin, fonts.title)}>
                   </div>
                   )
               })}
@@ -126,8 +123,17 @@ export default function Table({
         }>
           {contentArray.columns.map((entry, index) => {
             return (
-              <div key={uniqkey2 + index} style={Object.assign({ width: entry.width }, margins.fieldMargin, fonts.title)}>
-                {validateLanguage(entry.title,lang)}
+              <div key={uniqkey2 + reduxID + index} style={Object.assign({ width: entry.width }, margins.fieldMargin, fonts.title)}>
+                <span 
+                  key={uniqkey2 + reduxID + index}
+                  style={{overflow: 'hidden', cursor: 'pointer'}}
+                  onClick={() => store.dispatch(
+                    tableSorting.tableSort(
+                      contentArray.type, entry.db
+                    )
+                  )}>
+                  {validateLanguage(entry.title,lang)}
+                </span>
               </div>
               )
           })}

@@ -8,7 +8,6 @@ const authCard = {
       type: FieldType.Text,
       db: 'username',
       placeholder: lang.email,
-      width: '80%',
       maxLength: '50',
       required: 'true'
     },
@@ -17,7 +16,6 @@ const authCard = {
       type: FieldType.Password,
       db: 'password',
       placeholder: lang.password,
-      width: '80%',
       maxLength: '250',
       required: 'true'
     },
@@ -25,18 +23,14 @@ const authCard = {
       title: lang.login,
       type: FieldType.Button,
       action: 'submit',
-      width: '40%'
     },
     {
       title: lang.register,
       type: FieldType.Button,
       action: 'other',
-      width: '40%'
     }
   ],
-  header: 'Login',
-  alignment: 'center',
-  offset1st: true
+  header: 'Login'
 };
 
 export default authCard;

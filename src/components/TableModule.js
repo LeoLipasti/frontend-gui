@@ -2,24 +2,29 @@ import React, { Component } from 'react';
 import Table from './modules/Table';
 
 /**
+ * @param {String} classnames
+ * @param {Object | Null} inlinestyle
  * @param {Object} model
  * @param {Array} attributes
- * @param {String} componentStyle
  * @param {String} language
  * 
  */
 export default function tableModule({
+  classnames,
+  inlinestyle,
   model,
   attributes,
-  componentStyle,
+  reduxID,
   language
 }) {
   return (
+    <div className={classnames ? 'overflow-auto'+classnames : 'overflow-auto'} style={inlinestyle}>
     <Table
-      contentArray={model}
-      attributes={attributes}
-      componentStyle={componentStyle}
-      lang={language}
-    />
+        contentArray={model}
+        attributes={attributes}
+        reduxID={reduxID}
+        lang={language}
+      />
+    </div>
   )
 }

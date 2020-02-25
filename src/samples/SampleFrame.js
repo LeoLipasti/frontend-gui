@@ -13,16 +13,17 @@ class App extends Component {
   }
   render() {
     return (
-      <div style={{ width: '50vw', height: '20vw', border: '1px solid black'}}>
+      <div>
         <Helmet>
           <html lang={lang.lang[this.props.reduxlang]}/>
           <title>Sample Frame Test Data</title>
           <meta name="”ROBOTS”" content="NOINDEX, FOLLOW" />
         </Helmet>
         <FrameModule
-          attributes={null}
+          classnames={''}
+          inlinestyle={{display: 'inline-block', width: '75vw', height: '100vh'}}
           model={test}
-          componentStyle={null}
+          attributes={null}
           reduxID="sampleFrame"
           route="testcalls"
           language={this.props.reduxlang}

@@ -4,36 +4,48 @@ import { formSubmits } from '../redux/actions/modules/formSubmits';
 import { moduleStates } from '../redux/actions/modules/moduleStates';
 import store from '../redux/store/store';
 
-
+/**
+ * @param {String} classnames
+ * @param {Object | Null} inlinestyle
+ * @param {Object} model
+ * @param {Array} attributes
+ * @param {String} reduxID
+ * @param {String} route
+ * @param {String} language
+ * @param {Function} clickHandlerOther
+ * 
+ */
 export default function FrameModule({
-  attributes,
+  classnames,
+  inlinestyle,
   model,
-  componentStyle,
+  attributes,
   reduxID,
   route,
   language,
   clickHandlerOther
 }) {
   return (
-    <Frame
-      reduxID={reduxID}
-      clickHandlerClose={() => {
-        store.dispatch(moduleStates(reduxID, {module_closed: true}))
-      }}
-      clickHandlerSubmit={e => {
-        store.dispatch(formSubmits(reduxID,route))
-      }}
-      clickHandlerOther={clickHandlerOther}
-      inputHandlerFocus={e => {
-        // focus if it is needed
-      }}
-      inputHandlerChange = {e => {
-        store.dispatch(moduleStates(reduxID,e))
-      }}
-      contentArray={model}
-      attributes={attributes}
-      componentStyle={componentStyle}
-      lang={language}
-    />
+    <div className={classnames ? 'overflow-auto'+classnames : 'overflow-auto'} style={inlinestyle}>
+      <Frame
+        clickHandlerClose={() => {
+          store.dispatch(moduleStates(reduxID, {module_closed: true}))
+        }}
+        clickHandlerSubmit={e => {
+          store.dispatch(formSubmits(reduxID,route))
+        }}
+        clickHandlerOther={clickHandlerOther}
+        inputHandlerFocus={e => {
+          // focus if it is needed
+        }}
+        inputHandlerChange = {e => {
+          store.dispatch(moduleStates(reduxID,e))
+        }}
+        contentArray={model}
+        attributes={attributes}
+        reduxID={reduxID}
+        lang={language}
+      />
+    </div>
   )
 }

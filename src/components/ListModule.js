@@ -2,24 +2,29 @@ import React, { Component } from 'react';
 import List from './modules/List';
 
 /**
+ * @param {String} classnames
+ * @param {Object | Null} inlinestyle
  * @param {Object} model
  * @param {Array} attributes
- * @param {String} componentStyle
  * @param {String} language
  * 
  */
 export default function listModule({
+  classnames,
+  inlinestyle,
   model,
   attributes,
-  componentStyle,
+  reduxID,
   language
 }) {
   return (
+    <div className={classnames ? 'overflow-auto'+classnames : 'overflow-auto'} style={inlinestyle}>
     <List
-      contentArray={model}
-      attributes={attributes}
-      componentStyle={componentStyle}
-      lang={language}
-    />
+        contentArray={model}
+        attributes={attributes}
+        reduxID={reduxID}
+        lang={language}
+      />
+    </div>
   )
 }

@@ -10,10 +10,11 @@ import './style/css/containers/list.css';
 import { Provider } from "react-redux";
 import store from "./redux/store/store"
 import { appPath } from './redux/actions/routes/appPath'
-import Login from './samples/SampleCard';
+//import Login from './samples/SampleCard';
 //import Login from './samples/SampleFrame';
 //import Login from './samples/SampleTableTestData';
 //import Login from './samples/SampleListTestData';
+import Login from './samples/SamplesTogether';
 //import Login from './Login';
 import lang from './lang/index'
 import {

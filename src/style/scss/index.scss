@@ -1,0 +1,34 @@
+// bootstrap theming
+
+@import "bootstrap-material-design/variables";
+@import "bootstrap-material-design/mixins";
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+@import "bootstrap-material-design/tables";
+
+@import "bootstrap-material-design/reboot";
+
+@import "bootstrap-material-design/layout";
+@import "bootstrap-material-design/buttons";
+@import "bootstrap-material-design/checkboxes";
+@import "bootstrap-material-design/custom-forms";
+@import "bootstrap-material-design/switches";
+@import "bootstrap-material-design/radios";
+@import "bootstrap-material-design/forms";
+@import "bootstrap-material-design/input-group";
+@import "bootstrap-material-design/list-group";
+@import "bootstrap-material-design/nav";
+@import "bootstrap-material-design/navbar";
+@import "bootstrap-material-design/alerts";
+@import "bootstrap-material-design/progress";
+@import "bootstrap-material-design/pagination";
+@import "bootstrap-material-design/type";
+@import "bootstrap-material-design/tooltip";
+@import "bootstrap-material-design/popover";
+@import "bootstrap-material-design/cards";
+@import "bootstrap-material-design/modal";
+@import "bootstrap-material-design/dropdown";
+@import "bootstrap-material-design/themes";
+
+@import "bootstrap-material-design/ripples";
+
+@import "bootstrap-material-design/extensions";

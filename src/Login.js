@@ -38,7 +38,6 @@ class Login extends Component {
         <CardModule
           attributes={null}
           model={auth}
-          componentStyle={null}
           reduxID="Login"
           route="testcalls"
           language={this.props.reduxlang}
