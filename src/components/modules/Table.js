@@ -124,7 +124,7 @@ export default function Table({
           {contentArray.columns.map((entry, index) => {
             return (
               <div key={uniqkey2 + reduxID + index} style={Object.assign({ width: entry.width }, margins.fieldMargin, fonts.title)}>
-                <span 
+                <span class="btn btn-primary" 
                   key={uniqkey2 + reduxID + index}
                   style={{overflow: 'hidden', cursor: 'pointer'}}
                   onClick={() => store.dispatch(
