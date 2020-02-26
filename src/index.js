@@ -36,44 +36,13 @@ if (!!languagekey) {
 }
 let queryUrl;
 
-function useDynamicRouting() {
-  let location = useLocation();
-  let newlang = location.pathname.split("/").slice(-1)[0];
-  if (!!lang[newlang]) {
-    store.dispatch(appPath(newlang));
-    language = newlang;
-    sessionStorage.setItem('language', language);
-  }
-  if (!window.history.state) {
-    window.history.pushState({ prevUrl: location.pathname}, null, location.pathname)
-  }
-  if (!!location.search) {
-    queryUrl = location.search.replace("?","");
-    window.history.pushState({ prevUrl: location.pathname}, null, location.pathname)
-    // REDIRECT - Language redirect
-    let queryLang = location.search.split("/").slice(-1)[0];
-    if (!!lang[queryLang]) {
-      store.dispatch(appPath(queryLang));
-      language = queryLang;
-      sessionStorage.setItem('language', language);
-    }
-    // REDIRECT - Existing route or 404
-    let allowedRoutes = [
-      lang.route_home[language],
-      lang.route_login[language],
-      lang.page_not_found[language]
-    ];
-    if (allowedRoutes.includes(queryUrl.split("/")[1])) {
-      console.log("REDIRECT");
-      console.log(queryUrl.split("/")[1]);
-    } else {
-      console.log("REDIRECT 404");
-      queryUrl = "/"+lang.page_not_found[language];
-    }
-    // translate routes
-    Object.values(lang.route_login).forEach(route => queryUrl = queryUrl.replace(route,lang.route_login[language]));
-  }
-}
+const elem = (
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>
+);
 
 function App() {
   useDynamicRouting();
@@ -91,13 +60,50 @@ function App() {
     </Switch>
   );
 }
-
-const elem = (
-  <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
-  </Provider>
-);
+/**
+ * dynamic routing uses routes defined under lang
+ */
+function useDynamicRouting() {
+  // React router dom useLocation
+  let location = useLocation();
+  // Parse language if specified to change SPA language
+  let newlang = location.pathname.split("/").slice(-1)[0];
+  if (!!lang[newlang]) {
+    store.dispatch(appPath(newlang));
+    language = newlang;
+    sessionStorage.setItem('language', language);
+  }
+  // Push route to window history
+  if (!window.history.state) {
+    window.history.pushState({ prevUrl: location.pathname}, null, location.pathname)
+  }
+  // Query field used for returning to a page inside SPA
+  if (!!location.search) {
+    queryUrl = location.search.replace("?","");
+    window.history.pushState({ prevUrl: location.pathname}, null, location.pathname)
+    // REDIRECT - Language redirect
+    let queryLang = location.search.split("/").slice(-1)[0];
+    if (!!lang[queryLang]) {
+      store.dispatch(appPath(queryLang));
+      language = queryLang;
+      sessionStorage.setItem('language', language);
+    }
+    // REDIRECT - Existing route or 404
+    let allowedRoutes = [
+      lang.route_home["en"],
+      lang.route_login["en"],
+      lang.page_not_found["en"],
+      lang.route_home["de"],
+      lang.route_login["de"],
+      lang.page_not_found["de"]
+    ];
+    // 404 not found
+    if (!allowedRoutes.includes(queryUrl.split("/")[1])) {
+      queryUrl = "/"+lang.page_not_found[language];
+    }
+    // translate routes
+    Object.values(lang.route_login).forEach(route => queryUrl = queryUrl.replace(route,lang.route_login[language]));
+  }
+}
 
 ReactDOM.render(elem, document.getElementById('root'));
