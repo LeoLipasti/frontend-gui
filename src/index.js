@@ -16,6 +16,7 @@ import { appPath } from './redux/actions/routes/appPath'
 //import Login from './samples/SampleListTestData';
 import Login from './samples/SamplesTogether';
 //import Login from './Login';
+import Error from './Error';
 import lang from './lang/index'
 import {
   BrowserRouter as Router,
@@ -49,18 +50,28 @@ function useDynamicRouting() {
   if (!!location.search) {
     queryUrl = location.search.replace("?","");
     window.history.pushState({ prevUrl: location.pathname}, null, location.pathname)
-    // REDIRECT
+    // REDIRECT - Language redirect
     let queryLang = location.search.split("/").slice(-1)[0];
     if (!!lang[queryLang]) {
       store.dispatch(appPath(queryLang));
       language = queryLang;
       sessionStorage.setItem('language', language);
     }
-    console.log("REDIRECT");
-    console.log(queryUrl);
+    // REDIRECT - Existing route or 404
+    let allowedRoutes = [
+      lang.route_home[language],
+      lang.route_login[language],
+      lang.page_not_found[language]
+    ];
+    if (allowedRoutes.includes(queryUrl.split("/")[1])) {
+      console.log("REDIRECT");
+      console.log(queryUrl.split("/")[1]);
+    } else {
+      console.log("REDIRECT 404");
+      queryUrl = "/"+lang.page_not_found[language];
+    }
     // translate routes
     Object.values(lang.route_login).forEach(route => queryUrl = queryUrl.replace(route,lang.route_login[language]));
-    console.log(queryUrl);
   }
 }
 
@@ -70,6 +81,9 @@ function App() {
     <Switch>
       <Route path={"/"+lang.route_login[language]}>
         <Login />
+      </Route>
+      <Route path={"/"+lang.page_not_found[language]}>
+        <Error />
       </Route>
       <Route path={"/"}>
         {!!queryUrl ? <Redirect to={queryUrl} /> : <Redirect to={"/"+lang.route_login[language]} />}

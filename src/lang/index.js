@@ -4,17 +4,22 @@ import formsDE from './forms/de';
 import headEN from './head/en';
 import headDE from './head/de';
 
+import bodyEN from './body/en';
+import bodyDE from './body/de';
+
 import routesEN from './routes/en';
 import routesDE from './routes/de';
 
 const en = {
   ...headEN,
+  ...bodyEN,
   ...formsEN,
   ...routesEN
 }
 
 const de = {
   ...headDE,
+  ...bodyDE,
   ...formsDE,
   ...routesDE
 }

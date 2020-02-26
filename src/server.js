@@ -35,8 +35,16 @@ app.use('/api', apiProxy);
 // Routing with query to return app state on refresh
 /* eslint-disable no-unused-vars */
 app.use((req, res) => {
-  console.log(`Not found URL: ${req.url}`);
-  res.redirect(`/?${req.url}`);
+  // FOR SPA ROUTING REDIRECT WITH QUERY
+  if (req.url.substring(0, 2) !== "/?") {
+    res.redirect(`/?${req.url}`);
+  } else {
+    console.log(`Not found URL: ${req.url}`);
+    res.status(HttpStatus.NOT_FOUND).send(JSON.stringify({
+      status: 'error',
+      message: HttpStatus.getStatusText(HttpStatus.NOT_FOUND),
+    }));
+  }
 });
 
 // 500 error handling
