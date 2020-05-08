@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CardModule from './components/CardModule';
+import CardPresenter from './components/CardPresenter';
 import auth from './models/forms/sampleAuth';
 import lang from './lang/index'
 import { connect } from "react-redux";
@@ -35,7 +35,7 @@ class Login extends Component {
             </li>
           </ul>
         </div>
-        <CardModule
+        <CardPresenter
           attributes={null}
           model={auth}
           reduxID="Login"

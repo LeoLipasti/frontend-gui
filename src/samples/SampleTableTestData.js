@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TableModule from '../components/TableModule';
+import TablePresenter from '../components/TablePresenter';
 import { connect } from "react-redux";
 import { tableData } from '../redux/actions/modules/tableData'
 import store from '../redux/store/store'
@@ -25,7 +25,7 @@ class App extends Component {
           <title>Sample Table Test Data</title>
           <meta name="”ROBOTS”" content="NOINDEX, FOLLOW" />
         </Helmet>
-        <TableModule
+        <TablePresenter
           classnames={''}
           inlinestyle={null}
           model={test}

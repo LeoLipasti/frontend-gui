@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ListModule from '../components/ListModule';
+import ListPresenter from '../components/ListPresenter';
 import { connect } from "react-redux";
 import { tableData } from '../redux/actions/modules/tableData'
 import store from '../redux/store/store'
@@ -25,7 +25,7 @@ class App extends Component {
           <title>Sample List Test Data</title>
           <meta name="”ROBOTS”" content="NOINDEX, FOLLOW" />
         </Helmet>
-        <ListModule
+        <ListPresenter
           classnames={''}
           inlinestyle={null}
           model={test}

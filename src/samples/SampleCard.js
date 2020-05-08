@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CardModule from '../components/CardModule';
+import CardPresenter from '../components/CardPresenter';
 import test from '../models/forms/sampleCard';
 import { connect } from "react-redux";
 
@@ -20,7 +20,7 @@ class App extends Component {
           <title>Sample Card Test Data</title>
           <meta name="”ROBOTS”" content="NOINDEX, FOLLOW" />
         </Helmet>
-        <CardModule
+        <CardPresenter
           classnames={''}
           inlinestyle={null}
           model={test}

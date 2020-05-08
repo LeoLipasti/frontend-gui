@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import List from './presenters/List';
+import Table from './presenters/Table';
 
 /**
  * @param {String} classnames
@@ -9,7 +9,7 @@ import List from './presenters/List';
  * @param {String} language
  * 
  */
-export default function listModule({
+export default function TablePresenter({
   classnames,
   inlinestyle,
   model,
@@ -19,7 +19,7 @@ export default function listModule({
 }) {
   return (
     <div className={classnames ? 'overflow-auto'+classnames : 'overflow-auto'} style={inlinestyle}>
-    <List
+    <Table
         contentArray={model}
         attributes={attributes}
         reduxID={reduxID}

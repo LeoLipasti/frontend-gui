@@ -16,7 +16,7 @@ import store from '../redux/store/store';
  * @param {Function} clickHandlerOther
  * 
  */
-export default function CardModule({
+export default function CardPresenter({
   classnames,
   inlinestyle,
   model,

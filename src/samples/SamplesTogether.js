@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import FrameModule from '../components/FrameModule';
-import CardModule from '../components/CardModule';
-import ListModule from '../components/ListModule';
-import TableModule from '../components/TableModule';
+import FramePresenter from '../components/FramePresenter';
+import CardPresenter from '../components/CardPresenter';
+import ListPresenter from '../components/ListPresenter';
+import TablePresenter from '../components/TablePresenter';
 
 import testCard from '../models/forms/sampleCard';
 import testFame from '../models/forms/sampleCard';
@@ -34,7 +34,7 @@ class App extends Component {
           <title>Samples</title>
           <meta name="”ROBOTS”" content="NOINDEX, FOLLOW" />
         </Helmet>
-        <CardModule
+        <CardPresenter
           classnames={''}
           inlinestyle={null}
           attributes={null}
@@ -47,14 +47,14 @@ class App extends Component {
             console.log('some action');
           }}
         />
-        <TableModule
+        <TablePresenter
           classnames={''}
           inlinestyle={{ display: 'inline-block', width: '40vw', height: '100vh'}}
           model={testTable}
           attributes={!!this.props.sampleProfiles && this.props.sampleProfiles}
           lang={this.props.reduxlang}
         />
-        <FrameModule
+        <FramePresenter
           classnames={''}
           inlinestyle={{display: 'inline-block', width: '35vw', height: '100vh'}}
           attributes={null}
@@ -66,7 +66,7 @@ class App extends Component {
             console.log('some action');
           }}
         />
-        <ListModule
+        <ListPresenter
           classnames={''}
           inlinestyle={{ display: 'inline-block', width: '25vw', height: '100vh'}}
           model={testList}

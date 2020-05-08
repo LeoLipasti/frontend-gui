@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FrameModule from '../components/FrameModule';
+import FramePresenter from '../components/FramePresenter';
 import test from '../models/forms/sampleCard';
 import { connect } from "react-redux";
 
@@ -19,7 +19,7 @@ class App extends Component {
           <title>Sample Frame Test Data</title>
           <meta name="”ROBOTS”" content="NOINDEX, FOLLOW" />
         </Helmet>
-        <FrameModule
+        <FramePresenter
           classnames={''}
           inlinestyle={{display: 'inline-block', width: '75vw', height: '100vh'}}
           model={test}

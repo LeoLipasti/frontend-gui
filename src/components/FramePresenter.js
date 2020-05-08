@@ -15,7 +15,7 @@ import store from '../redux/store/store';
  * @param {Function} clickHandlerOther
  * 
  */
-export default function FrameModule({
+export default function FramePresenter({
   classnames,
   inlinestyle,
   model,
