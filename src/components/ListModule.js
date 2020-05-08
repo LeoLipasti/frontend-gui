@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import List from './modules/List';
+import List from './presenters/List';
 
 /**
  * @param {String} classnames

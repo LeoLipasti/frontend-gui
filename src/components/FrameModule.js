@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Frame from './modules/Frame';
+import Frame from './presenters/Frame';
 import { formSubmits } from '../redux/actions/modules/formSubmits';
 import { moduleStates } from '../redux/actions/modules/moduleStates';
 import store from '../redux/store/store';

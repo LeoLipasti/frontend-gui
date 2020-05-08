@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Table from './modules/Table';
+import Table from './presenters/Table';
 
 /**
  * @param {String} classnames

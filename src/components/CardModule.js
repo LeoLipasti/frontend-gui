@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Card from './modules/Card';
+import Card from './presenters/Card';
 import { formSubmits } from '../redux/actions/modules/formSubmits';
 import { moduleStates } from '../redux/actions/modules/moduleStates';
 import store from '../redux/store/store';
