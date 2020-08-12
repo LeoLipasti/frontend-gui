@@ -72,6 +72,14 @@ const fieldWidths = {
     minWidth: '1/3',
     maxWidth: '1/2'
   },
+  image: {
+    minWidth: '1/8',
+    maxWidth: '1'
+  },
+  chart: {
+    minWidth: '1/2',
+    maxWidth: '1'
+  },
 };
 
 export default fieldWidths;

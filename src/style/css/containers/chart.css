@@ -1,0 +1,15 @@
+
+/* containers only */
+
+.chart_container {
+  width: 33.333vw;
+  height: 20vw;
+  display: inline-block;
+}
+
+@media only screen and (orientation: portrait) {
+  .chart_container {
+    width: 100%;
+    height: 50%;
+  }
+}

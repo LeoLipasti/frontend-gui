@@ -1,85 +1,82 @@
-import tokenstore from './redux/tokenstore';
-import methods from './methods';
-import headers from './headers';
+import DefaultOptions from './defaults/options';
+import Filters from './filters';
 import fetch from 'isomorphic-unfetch';
 import nconf from '../config';
-import { socket } from "./socket";
+import store from '../redux/store/store';
+import tokenstore from '../redux/store/tokenstore';
+import { res_responseStates } from '../redux/actions/responses/responseStates'
 
 /**
- * json api fetcher options
- *
- * @param {String} endpoint
- * @param {String} method
- * @param {Object} body
- * @param {String} token
+ * Fetch with valid parameters
  * 
- * sample call for this enforced fetch :
- * fetch( '/users/:id', 'patch', {}, 'token', offset: 'num', filters: [] );
+ * @param {String} devPath
+ * @param {Object} devOptions
+ * @param {Boolean} devToken
+ * @param {String} reduxID
+ * @param {Number} userOffset
+ * @param {String[]} userFilters
+ * @param {Object} customdata
+ * 
+ * sample call for this fetch :
+ * jsonFetch( '/users/:id', { method: 'PATCH' }, token{Boolean}, reduxID=json-type{string}, userOffset{Number}, filters{Array} );
  */
-export default function jsonFetch(
-    endpoint,
-    method,
-    body,
-    token,
-    offset,
-    filters
+export default async function jsonFetch(
+    devPath,
+    devOptions,
+    devToken,
+    reduxID,
+    userOffset,
+    userFilters,
+    customdata
   ) {
-  const options = {};
+  const options = new DefaultOptions();
+  const filters = new Filters();
   try {
-    // filters
-    const filterQuery = !!offset ? '?page[size]=25&page[offset]=' + offset : '';
-    const filtersJoin = !!offset ? '&' : '?';
-    const filtersExtra = !!filters ? filtersJoin + filters.join('&') : '';
-    //
-    // endpoint
-    // enforcing slash if not given correctly
-    //
-    let slash_endpoint = endpoint;
-    if (endpoint.substring(0,1) !== '/') {
-      slash_endpoint = '/' + endpoint + filterQuery + filtersExtra;
+    let path = devPath;
+    if (devPath.substring(0,1) !== '/') {
+      path = '/' + devPath;
     }
-    //
-    // method
-    // enforcing parameter to lowercase
-    //
-    options['method'] = methods[method.toLowerCase()];
-    //
-    // token (optional)
-    // enforcing parameter to lowercase
-    //
-    if (!token || token.toLowerCase() !== 'token') {
-      options['headers'][headers.content] = headers.json;
+
+    if (!!userOffset || !!userFilters) {
+      filters.applyFilters();
+      path = path + filters.query;
+    }
+
+    await options.override(
+      devToken,
+      devOptions.headers,
+      devOptions.method,
+      devOptions.mode,
+      devOptions.cors,
+      reduxID
+    )
+
+    if (options.method !== 'GET' && options.method !== 'HEAD' && !!reduxID){
+      options.body.data = await store.getState().req_requestStates[reduxID];
+      options.body = JSON.stringify(options.body);
+    } else if (!!customdata) {
+      options.body.data = customdata;
+      options.body = JSON.stringify(options.body);
     } else {
-      options['headers'][headers.auth] = tokenstore.getState();
-      options['headers'][headers.content] = headers.json;
+      options.body = undefined;
     }
-    //
-    // mode
-    //
-    options['mode'] = 'cors';
-    //
-    // body (optional)
-    // enforcing as data if not given correctly
-    //
-    if (!!body) {
-      if (!body['data']) {
-        options['body'] = { 'data': body };
-      } else {
-        options['body'] = body;
-      }
-    }
-    //
-    // return
-    //
-    return fetch(nconf.API_ENDPOINT + slash_endpoint, options)
+
+    return fetch(nconf.API_ENDPOINT + path, options)
     .then(response => response.json())
     .then((response) => {
-      if (response.errors) {
+      if (!!response.errors) {
         console.log('Error: ', response.errors);
       }
-      else {
-        // emit socket.io event for other users
-        socket.emit("dataUpdate", response.data.type);
+      // REDUX
+      // TYPE = TOKEN
+      if (!!response.data && response.data.type === 'token') {
+        tokenstore.dispatch({
+          type: "ASSIGNTOKEN",
+          value: response.data.attributes.token
+        });
+      // TYPE = OTHER
+      } else if (!!response.data && !!response.data.type){
+        store.dispatch(res_responseStates({ data: response.data.attributes, type: response.data.type }));
       }
       return response;
     });

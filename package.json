@@ -5,6 +5,7 @@
   "port": 8096,
   "dependencies": {
     "@material-ui/core": "^4.6.0",
+    "chart.js": "^2.9.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "http-proxy-middleware": "^0.20.0",
@@ -23,9 +24,11 @@
     "typescript": "^3.7.3"
   },
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "concurrently --kill-others \"NODE_ENV=development node src/server.js\" \"PORT=8097 react-scripts start\"",
+    "start": "node -r esm src/server.js",
+    "dev": "concurrently --kill-others \"NODE_ENV=development node -r esm src/server.js\" \"PORT=8097 react-scripts start\"",
     "build": "react-scripts build",
+    "bootstrap": "sass src/style/scss/index.scss public/stylesheets/index.css",
+    "typescript": "tsc --watch",
     "test:lint": "echo \"ADD LINT TESTS\"; exit 0;",
     "test:unit": "echo \"FIX ME\"; exit 0;",
     "_test": "jest",
@@ -97,6 +100,7 @@
     "husky": "^3.1.0",
     "jest": "^24.9.0",
     "lint-staged": "^9.4.2",
-    "semantic-release": "^15.13.30"
+    "semantic-release": "^15.13.30",
+    "bootstrap": "^4.4.1"
   }
 }

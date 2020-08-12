@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import ListPresenter from '../components/ListPresenter';
 import { connect } from "react-redux";
-import { tableData } from '../redux/actions/modules/tableData'
+import { res_responseStates } from '../redux/actions/responses/responseStates'
 import store from '../redux/store/store'
-import test from '../models/lists/sampleList';
 import testdata from '../dev/testdata';
 
 import lang from '../lang/index'
@@ -15,7 +14,7 @@ class App extends Component {
     this.state = { step: null };
   }
   componentDidMount() {
-    store.dispatch(tableData({ data: testdata.data, tablename: 'sampleProfiles' }));
+    store.dispatch(res_responseStates({ data: testdata.data, type: 'sampleProfiles' }));
   }
   render() {
     return (
@@ -28,9 +27,9 @@ class App extends Component {
         <ListPresenter
           classnames={''}
           inlinestyle={null}
-          model={test}
-          attributes={!!this.props.sampleProfiles && this.props.sampleProfiles}
+          model={'sampleList'}
           lang={this.props.reduxlang}
+          reduxID="sampleProfiles"
         />
       </div>
     )
@@ -40,8 +39,8 @@ class App extends Component {
 function mapStateToProps(state) {
   // state refers to global redux state
   return {
-    sampleProfiles: state.tableData && state.tableData.sampleProfiles && state.tableData.sampleProfiles,
-    reduxlang: state.appPath && state.appPath.appPath && state.appPath.appPath
+    sampleProfiles: state.res_responseStates && state.res_responseStates.sampleProfiles && state.res_responseStates.sampleProfiles,
+    reduxlang: state['appPath'] && state['appPath']['appPath'] && state['appPath']['appPath']
 
   };
 }

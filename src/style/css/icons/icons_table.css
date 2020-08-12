@@ -1,0 +1,10 @@
+.table_headers {
+  display: inline;
+  position: absolute;
+}
+
+@media only screen and (orientation: portrait) {
+  .table_headers {
+    display: none;
+  }
+}

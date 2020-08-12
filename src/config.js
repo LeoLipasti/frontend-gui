@@ -31,7 +31,7 @@ nconf
     PORT: packageJson.port,
     isProduction: process.env.NODE_ENV === 'production',
     API_ENDPOINT: process.env.REACT_APP_API_ENDPOINT || `http://localhost:${packageJson.port}/api`,
-    PAPI_ENDPOINT: process.env.REACT_APP_PAPI_ENDPOINT || `http://papi_endpoint:500`
+    PAPI_ENDPOINT: process.env.REACT_APP_PAPI_ENDPOINT || `http://localhost:8099/papi`
   });
 
 // Check required settings

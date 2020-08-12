@@ -1,51 +1,57 @@
 import React, { Component } from 'react';
-import CardPresenter from './components/CardPresenter';
-import auth from './models/forms/sampleAuth';
-import lang from './lang/index'
+import HelmetPresenter from './components/HelmetPresenter';
+import AuthPresenter from './components/AuthPresenter';
 import { connect } from "react-redux";
-import { Helmet } from 'react-helmet';
-import {
-  Link
-} from "react-router-dom";
+
+import jsonFetch from './fetch/jsonFetch';
+
+import { sessionReset } from './storage/sessionStorage';
+
+import lang from './lang/index'
 
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { step: null };
+    this.state = { step: null, password: null, username: null, callState: 'waiting' };
+  }
+  componentDidMount() {
+    sessionReset();
   }
   render() {
     return (
       <div>
-        <Helmet>
-          <html lang={lang.lang[this.props.reduxlang]}/>
-            <title>{lang.titles[this.props.reduxlang].login}</title>
-          <meta name="description" content={lang.pages[this.props.reduxlang].login} />
-        </Helmet>
-        <div>
-          <ul>
-            <li>
-              <Link to={"/"+lang.lang[this.props.reduxlang]}>
-                {lang.route_home[this.props.reduxlang]}
-              </Link>
-            </li>
-            <li>
-              <Link to={"/"+lang.route_login[this.props.reduxlang]+"/"+lang.lang[this.props.reduxlang]}>
-                {lang.route_login[this.props.reduxlang]}
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <CardPresenter
+        <HelmetPresenter
+          reduxlang={this.props.reduxlang} 
+          target={'login'}
+          bg={true}
+          >
+        </HelmetPresenter>
+        <AuthPresenter
           attributes={null}
-          model={auth}
-          reduxID="Login"
-          route="testcalls"
+          model={'sampleAuth'}
           language={this.props.reduxlang}
           closed={false}
           clickHandlerOther={e => {
             console.log('register placeholder');
           }}
+          credentials={e => {
+            this.setState(e);
+          }}
+          submit={e => {
+            // replace tokens test path by public api path and use this instead:
+            //jsonFetch( '/testcalls', { method: 'POST' }, false, undefined, 0, [], { username: this.state.username, password: this.state.password }
+            this.setState({ callState: 'calling' });
+            jsonFetch( '/tokens/0', { method: 'GET' }, false, undefined, 0, [], undefined )
+            .then(() => {
+              window.location.replace('/'+lang.route_dashboard[this.props.reduxlang]);
+            })
+            .catch((err) => {
+              this.setState({ callState: 'servererror' });
+            })
+          }}
+          callState={this.state.callState}
         />
+
       </div>
     )
   }
@@ -54,7 +60,7 @@ class Login extends Component {
 function mapStateToProps(state) {
   // state refers to global redux state
   return {
-    reduxlang: state.appPath && state.appPath.appPath && state.appPath.appPath
+    reduxlang: state['appPath'] && state['appPath']['appPath'] && state['appPath']['appPath']
   };
 }
 

@@ -10,18 +10,23 @@ import bodyDE from './body/de';
 import routesEN from './routes/en';
 import routesDE from './routes/de';
 
+import testingEN from './testing/en';
+import testingDE from './testing/de';
+
 const en = {
   ...headEN,
   ...bodyEN,
   ...formsEN,
-  ...routesEN
+  ...routesEN,
+  ...testingEN
 }
 
 const de = {
   ...headDE,
   ...bodyDE,
   ...formsDE,
-  ...routesDE
+  ...routesDE,
+  ...testingDE
 }
 
 const lang = {

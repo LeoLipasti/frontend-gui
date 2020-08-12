@@ -1,9 +1,9 @@
 // each model has been given a reference response
 import responses from '../../jest/responses/index'
 
-import forms from '../../models/forms/typechecks';
-import lists from '../../models/lists/typechecks';
-import tables from '../../models/tables/typechecks';
+import forms from '../../models/samples/forms/typechecks';
+import lists from '../../models/samples/lists/typechecks';
+import tables from '../../models/samples/tables/typechecks';
 
 // ../responses compared with ./Models
 describe('Models have been given a sample response to test', () => {

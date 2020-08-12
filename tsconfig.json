@@ -22,7 +22,8 @@
     "jsx": "react"
   },
   "include": [
-    "src/models/**/*"
+    "src/models/**/*",
+    "src/entities/index.ts"
   ],
   "exclude": [
     "node_modules",

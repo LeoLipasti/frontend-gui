@@ -2,8 +2,8 @@
 // a check to see if it has valid attributes
 import responses from '../../jest/responses/index'
 
-import lists from '../../models/lists/typechecks';
-import tables from '../../models/tables/typechecks';
+import lists from '../../models/samples/lists/typechecks';
+import tables from '../../models/samples/tables/typechecks';
 
 // ../responses compared with ./Models
 // Comparing response data with model where response type and model type match

@@ -9,8 +9,7 @@
 
 .frame_inner_scroll {
   width: 100%;
-  min-height: calc(100% - 4rem);
-  max-height: calc(100% - 4rem);
+  height: calc(100% - 4rem);
   overflow-y: auto;
   overflow-x: hidden;
   padding-left: 1rem;

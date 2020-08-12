@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import FramePresenter from '../components/FramePresenter';
-import test from '../models/forms/sampleCard';
 import { connect } from "react-redux";
 
 import lang from '../lang/index'
@@ -22,8 +21,7 @@ class App extends Component {
         <FramePresenter
           classnames={''}
           inlinestyle={{display: 'inline-block', width: '75vw', height: '100vh'}}
-          model={test}
-          attributes={null}
+          model={'sampleCard'}
           reduxID="sampleFrame"
           route="testcalls"
           language={this.props.reduxlang}
@@ -39,7 +37,7 @@ class App extends Component {
 function mapStateToProps(state) {
   // state refers to global redux state
   return {
-    reduxlang: state.appPath && state.appPath.appPath && state.appPath.appPath
+    reduxlang: state['appPath'] && state['appPath']['appPath'] && state['appPath']['appPath']
 
   };
 }

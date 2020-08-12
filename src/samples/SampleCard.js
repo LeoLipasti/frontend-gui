@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import CardPresenter from '../components/CardPresenter';
-import test from '../models/forms/sampleCard';
 import { connect } from "react-redux";
 
 import lang from '../lang/index'
@@ -23,12 +22,11 @@ class App extends Component {
         <CardPresenter
           classnames={''}
           inlinestyle={null}
-          model={test}
-          attributes={null}
+          model={'sampleCard'}
           reduxID="sampleCard"
           route="testcalls"
           language={this.props.reduxlang}
-          closed={this.props.moduleState && this.props.moduleState.module_closed}
+          closed={this.props.requestState && this.props.requestState.module_closed}
           clickHandlerOther={e => {
             console.log('some action');
           }}
@@ -41,8 +39,8 @@ class App extends Component {
 function mapStateToProps(state) {
   // state refers to global redux state
   return {
-    reduxlang: state.appPath && state.appPath.appPath && state.appPath.appPath,
-    moduleState: state.moduleStates && state.moduleStates["moduledata_sampleCard"]
+    reduxlang: state['appPath'] && state['appPath']['appPath'] && state['appPath']['appPath'],
+    requestState: state.req_requestStates && state.req_requestStates["sampleCard"]
   };
 }
 

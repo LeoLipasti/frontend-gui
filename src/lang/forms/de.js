@@ -3,5 +3,7 @@ module.exports = {
   email: 'Email',
   password: 'Passwort',
   login: 'Einloggen',
-  register: 'Registrieren'
+  register: 'Registrieren',
+  genericerror: 'Etwas ist schief gelaufen.',
+  servererror: 'Interner Serverfehler. Bitte versuchen Sie es später noch einmal.',
 };

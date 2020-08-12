@@ -2,9 +2,9 @@
 // only files from typechecks are imported
 // typescript should also already error with ts files
 // but this test is for the actual compiled js files
-import forms from '../../models/forms/typechecks';
-import lists from '../../models/lists/typechecks';
-import tables from '../../models/tables/typechecks';
+import forms from '../../models/samples/forms/typechecks';
+import lists from '../../models/samples/lists/typechecks';
+import tables from '../../models/samples/tables/typechecks';
 
 // ./Models
 describe('given model data is in the assumed format', () => {
